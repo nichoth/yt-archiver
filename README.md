@@ -13,7 +13,18 @@ Archive the comments on youtube pages.
 [See a live demo](https://namespace.github.io/package-name/)
 
 <details><summary><h2>Contents</h2></summary>
+
 <!-- toc -->
+
+- [Install](#install)
+- [API](#api)
+  * [ESM](#esm)
+  * [Common JS](#common-js)
+- [Example](#example)
+  * [JS](#js)
+
+<!-- tocstop -->
+
 </details>
 
 ## Install

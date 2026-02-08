@@ -1,6 +1,6 @@
 {
   "name": "@nichoth/yt-archiver",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "description": "Archive youtube comment threads",
   "main": "dist/index.js",
