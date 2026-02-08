@@ -1,33 +1,84 @@
-# template ts
-![tests](https://github.com/bicycle-codes/util/actions/workflows/nodejs.yml/badge.svg)
-[![types](https://img.shields.io/npm/types/@bicycle-codes/util?style=flat-square)](README.md)
-[![dependencies](https://img.shields.io/badge/dependencies-zero-brightgreen.svg?style=flat-square)](package.json)
+# package name here
+![tests](https://github.com/bicycle-codes/crypto-util/actions/workflows/nodejs.yml/badge.svg)
+[![types](https://img.shields.io/npm/types/@substrate-system/icons?style=flat-square)](README.md)
+[![module](https://img.shields.io/badge/module-ESM%2FCJS-blue?style=flat-square)](README.md)
 [![semantic versioning](https://img.shields.io/badge/semver-2.0.0-blue?logo=semver&style=flat-square)](https://semver.org/)
-[![license](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+[![Common Changelog](https://nichoth.github.io/badge/common-changelog.svg)](./CHANGELOG.md)
+[![install size](https://flat.badgen.net/packagephobia/install/@nichoth/session-cookie)](https://packagephobia.com/result?p=@nichoth/session-cookie)
+[![dependencies](https://img.shields.io/badge/dependencies-zero-brightgreen.svg?style=flat-square)](package.json)
+[![license](https://img.shields.io/badge/license-Big_Time-blue?style=flat-square)](LICENSE)
 
-A template for typescript *dependency* modules that run in node. See [template-ts-browser](https://github.com/nichoth/template-ts-browser) for the same thing but targeting a browser environment.
 
->
-> [!IMPORTANT]  
-> This builds to **ESM only**.
->
+`<package description goes here>`
+
+[See a live demo](https://namespace.github.io/package-name/)
+
+<details><summary><h2>Contents</h2></summary>
+<!-- toc -->
+</details>
+
+## install
+
+Installation instructions
+
+```sh
+npm i -S @namespace/package
+```
+
+## API
+
+This exposes ESM and common JS via [package.json `exports` field](https://nodejs.org/api/packages.html#exports).
+
+### ESM
+```js
+import '@namespace/package/module'
+```
+
+### Common JS
+```js
+require('@namespace/package/module')
+```
+
+## CSS
+
+### Import CSS
+
+```js
+import '@namespace/package-name/css'
+```
+
+Or minified:
+```js
+import '@namespace/package-name/css/min'
+```
+
+### Customize CSS via some variables
+
+```css
+component-name {
+    --example: pink;
+}
+```
 
 ## use
 
-1. Use the template button in github. Or clone this then `rm -rf .git && git init`.
-2. `npm i && npm init`.
-3. Edit `README.md` -- change the CI badge URL + rewrite docs
-5. Edit the source code in `src/index.ts`, edit tests in `test`
+`usage instructions here`
 
-## featuring
+### JS
+```js
+import '@namespace/package/module'
+```
 
-* Compile the source to ESM, and put compiled files in `dist`.
-* Ignore `dist` and `*.js` in git, but don't ignore them in npm.
-  That way we don't commit any compiled code to git, but it is
-  available to consumers.
-* use npm's `prepublishOnly` hook to compile the code before publishing to npm.
-* use `exports` field in `package.json` to make sure the right format is used by consumers.
-* `preversion` npm hook -- lint via `standardx`.
-* `postversion` npm hook -- `git push && git push --tags && npm publish`
-* compile tests and run in a node environment
-* CI via github actions
+### pre-built JS
+This package exposes minified JS files too. Copy them to a location that is
+accessible to your web server, then link to them in HTML.
+
+#### copy
+```sh
+cp ./node_modules/@namespace/package/dist/module.min.js ./public
+```
+
+#### HTML
+```html
+<script type="module" src="./module.min.js"></script>
+```

@@ -6,6 +6,9 @@
   "files": [
     "./dist/*"
   ],
+  "bin": {
+    "yta": "./dist/cli.js"
+  },
   "exports": {
     ".": "./dist/index.js",
     "./*": [
@@ -17,7 +20,8 @@
     "lint": "eslint \"./**/*.{ts,js}\"",
     "test": "esbuild test/index.ts --platform=node --format=esm --keep-names --bundle | node --input-type=module | tap-spec",
     "build-esm": "esbuild src/*.ts --format=esm --metafile=dist/meta.json --keep-names --tsconfig=tsconfig.build.json --outdir=./dist --sourcemap && tsc --emitDeclarationOnly --project tsconfig.build.json --outDir dist",
-    "build": "mkdir -p ./dist && rm -rf ./dist/* && npm run build-esm",
+    "build-cli": "esbuild src/cli.ts --format=esm --platform=node --bundle --outfile=dist/cli.js --banner:js='#!/usr/bin/env node' && chmod +x dist/cli.js",
+    "build": "mkdir -p ./dist && rm -rf ./dist/* && npm run build-esm && npm run build-cli",
     "toc": "markdown-toc --maxdepth 3 -i README.md",
     "preversion": "npm run lint",
     "version": "npm run toc && auto-changelog -p --template keepachangelog --breaking-pattern 'BREAKING CHANGE:' && git add CHANGELOG.md README.md",
@@ -25,8 +29,8 @@
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@substrate-system/debug": "^0.9.2",
-    "@substrate-system/tapzero": "^0.10.5",
+    "@substrate-system/debug": "^0.9.60",
+    "@substrate-system/tapzero": "^0.10.16",
     "@types/node": "^24.0.3",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
@@ -39,5 +43,8 @@
     "typescript": "^5.7.2"
   },
   "license": "SEE LICENSE IN LICENSE",
-  "author": "nichoth <nichoth@gmail.com> (https://nichoth.com)"
+  "author": "nichoth <nichoth@gmail.com> (https://nichoth.com)",
+  "dependencies": {
+    "parse5": "^8.0.0"
+  }
 }

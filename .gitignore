@@ -6,4 +6,5 @@ test/*.js*
 test/index.d.ts*
 dist
 .env
+.claude
 
