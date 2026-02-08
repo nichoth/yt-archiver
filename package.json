@@ -20,7 +20,7 @@
     "lint": "eslint \"./**/*.{ts,js}\"",
     "test": "esbuild test/index.ts --platform=node --format=esm --keep-names --bundle | node --input-type=module | tap-spec",
     "build-esm": "esbuild src/*.ts --format=esm --metafile=dist/meta.json --keep-names --tsconfig=tsconfig.build.json --outdir=./dist --sourcemap && tsc --emitDeclarationOnly --project tsconfig.build.json --outDir dist",
-    "build-cli": "esbuild src/cli.ts --format=esm --platform=node --bundle --outfile=dist/cli.js --banner:js='#!/usr/bin/env node' && chmod +x dist/cli.js",
+    "build-cli": "esbuild src/cli.ts --format=esm --platform=node --bundle --outfile=dist/cli.js && chmod +x dist/cli.js",
     "build": "mkdir -p ./dist && rm -rf ./dist/* && npm run build-esm && npm run build-cli",
     "toc": "markdown-toc --maxdepth 3 -i README.md",
     "preversion": "npm run lint",

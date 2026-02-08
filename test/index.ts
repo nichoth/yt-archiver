@@ -13,58 +13,65 @@ test('archivePage returns HTML', async t => {
 
 test('result has document structure', async t => {
     t.ok(
-        html.includes('<html') || html.includes('<HTML'),
+        html.includes('<html'),
         'should contain an html element'
     )
     t.ok(
-        html.includes('<head') || html.includes('<HEAD'),
+        html.includes('<head'),
         'should contain a head element'
     )
     t.ok(
-        html.includes('<body') || html.includes('<BODY'),
+        html.includes('<body'),
         'should contain a body element'
     )
 })
 
-test('no external stylesheet links remain', async t => {
-    const hasExternalCss =
-        /<link[^>]+rel=["']stylesheet["'][^>]+href/i
+test('contains no scripts', async t => {
+    const hasScript = /<script/i
     t.ok(
-        !hasExternalCss.test(html),
-        'should not have external CSS links'
+        !hasScript.test(html),
+        'should not contain any script tags'
     )
 })
 
-test('no external script src remain', async t => {
-    const hasExternalScript = /<script[^>]+src=/i
-    t.ok(
-        !hasExternalScript.test(html),
-        'should not have external script src attributes'
-    )
-})
-
-test('contains inlined style tags', async t => {
+test('contains inlined styles', async t => {
     t.ok(
         html.includes('<style'),
         'should contain inlined style elements'
     )
 })
 
-test('contains inline script content', async t => {
-    // YouTube pages always have inline scripts with
-    // page data like ytInitialData
+test('contains top-level comments', async t => {
     t.ok(
-        html.includes('ytInitialData') ||
-            html.includes('ytInitialPlayerResponse') ||
-            html.includes('ytcfg'),
-        'should contain YouTube page data in scripts'
+        html.includes('yta-comment'),
+        'should contain rendered comment elements'
+    )
+    t.ok(
+        html.includes('yta-thread'),
+        'should contain thread wrappers'
     )
 })
 
-test('no video data inlined', async t => {
-    // A YouTube page with inlined CSS/JS is ~15-20MB due
-    // to the large JS bundles. Video data would be 100s of
-    // MB, so 50MB is a safe upper bound.
+test('contains threaded replies', async t => {
+    t.ok(
+        html.includes('yta-replies-details'),
+        'should contain reply details elements'
+    )
+    t.ok(
+        html.includes('yta-replies-toggle'),
+        'should contain reply toggle buttons'
+    )
+    t.ok(
+        /\d+ replies/.test(html),
+        'should contain "N replies" text'
+    )
+    t.ok(
+        html.includes('yta-replies-list'),
+        'should contain reply list containers'
+    )
+})
+
+test('page is a reasonable size', async t => {
     const sizeMB = html.length / (1024 * 1024)
     t.ok(
         sizeMB < 50,
