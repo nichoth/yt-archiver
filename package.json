@@ -1,13 +1,12 @@
 {
-  "type": "module",
-  "private": true,
+  "name": "@nichoth/yt-archiver",
   "version": "0.0.0",
+  "type": "module",
+  "description": "Archive youtube comment threads",
   "main": "dist/index.js",
-  "files": [
-    "./dist/*"
-  ],
+  "types": "./dist/index.d.ts",
   "bin": {
-    "yta": "./dist/cli.js"
+    "yta": "dist/cli.js"
   },
   "exports": {
     ".": "./dist/index.js",
@@ -16,6 +15,9 @@
       "./dist/*"
     ]
   },
+  "files": [
+    "./dist/*"
+  ],
   "scripts": {
     "lint": "eslint \"./**/*.{ts,js}\"",
     "test": "esbuild test/index.ts --platform=node --format=esm --keep-names --bundle | node --input-type=module | tap-spec",
@@ -27,6 +29,9 @@
     "version": "npm run toc && auto-changelog -p --template keepachangelog --breaking-pattern 'BREAKING CHANGE:' && git add CHANGELOG.md README.md",
     "postversion": "git push --follow-tags && npm publish",
     "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "parse5": "^8.0.0"
   },
   "devDependencies": {
     "@substrate-system/debug": "^0.9.60",
@@ -42,9 +47,22 @@
     "tap-spec": "^5.0.0",
     "typescript": "^5.7.2"
   },
-  "license": "SEE LICENSE IN LICENSE",
+  "keywords": [
+    "archive",
+    "youtube",
+    "comments"
+  ],
+  "homepage": "https://github.com/nichoth/yt-archiver#readme",
+  "bugs": {
+    "url": "https://github.com/nichoth/yt-archiver/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nichoth/yt-archiver.git"
+  },
+  "directories": {
+    "test": "test"
+  },
   "author": "nichoth <nichoth@gmail.com> (https://nichoth.com)",
-  "dependencies": {
-    "parse5": "^8.0.0"
-  }
+  "license": "SEE LICENSE IN LICENSE"
 }
