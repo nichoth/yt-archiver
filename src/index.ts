@@ -491,6 +491,8 @@ ${repliesHtml}
 
 function buildPage (
     title:string,
+    videoUrl:string,
+    videoId:string,
     threads:CommentThread[]
 ):string {
     const totalComments = threads.reduce(
@@ -522,11 +524,27 @@ body {
     margin: 0 auto;
     padding: 24px 16px;
 }
+.yta-thumb-link {
+    display: block;
+    margin-bottom: 12px;
+}
+.yta-thumb {
+    width: 100%;
+    border-radius: 12px;
+    display: block;
+}
 .yta-page-title {
     font-size: 18px;
     font-weight: 600;
     line-height: 1.3;
     margin: 0 0 4px;
+}
+.yta-page-title a {
+    color: inherit;
+    text-decoration: none;
+}
+.yta-page-title a:hover {
+    text-decoration: underline;
 }
 .yta-comments-header {
     font-size: 14px;
@@ -609,9 +627,16 @@ details[open] > .yta-replies-toggle::before {
 </head>
 <body>
   <div class="yta-page">
-    <h1 class="yta-page-title">${
-        escapeHtml(title)
-    }</h1>
+    <a href="${escapeHtml(videoUrl)}" class="yta-thumb-link">
+      <img class="yta-thumb"
+        src="https://i.ytimg.com/vi/${
+            encodeURIComponent(videoId)
+        }/maxresdefault.jpg"
+        alt="${escapeHtml(title)}" />
+    </a>
+    <h1 class="yta-page-title"><a href="${
+        escapeHtml(videoUrl)
+    }">${escapeHtml(title)}</a></h1>
     <div class="yta-comments-header">${
         totalComments
     } comments</div>
@@ -640,6 +665,10 @@ export async function archivePage (
     }
 
     const rawHtml = await res.text()
+    const videoUrl = res.url
+    const videoId = videoUrl.match(
+        /v=([^&]+)/
+    )?.[1] || ''
 
     const ytInitialData = extractJsonVar(
         rawHtml, 'ytInitialData'
@@ -659,5 +688,5 @@ export async function archivePage (
         )
     }
 
-    return buildPage(title, threads)
+    return buildPage(title, videoUrl, videoId, threads)
 }
